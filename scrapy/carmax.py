@@ -3,8 +3,8 @@
 import scrapy
 
 
-class EbaySpider(scrapy.Spider):
-    name = 'ebay_motors2'
+class CarMaxSpider(scrapy.Spider):
+    name = 'carmax'
 
     custom_settings = {
         "DOWNLOAD_DELAY": 1,
@@ -14,7 +14,7 @@ class EbaySpider(scrapy.Spider):
 
 # Used cars, 'Buy it Now', no zip code specified
 
-    start_urls = ['https://www.ebay.com/sch/Cars-Trucks/6001/i.html?_sop=13&LH_Complete=1&LH_Sold=1&LH_PrefLoc=2&_ipg=200&rt=nc']
+    start_urls = ['https://www.carmax.com/search#Distance=all&ExposedCategories=249+250+1001+1000+265+999+772&ExposedDimensions=249+250+1001+1000+265+999+772&Page=1&PerPage=50&SortKey=0&Zip=10022']
 
 
     def parse(self, response):
