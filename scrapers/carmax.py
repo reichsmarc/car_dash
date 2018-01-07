@@ -1,7 +1,6 @@
 import requests
 import json
 import pandas as pd
-from random import randint
 import time
 import timeit
 import os

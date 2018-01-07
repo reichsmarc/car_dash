@@ -35,13 +35,15 @@ def cargurus(zipcode,dist='all',page_num=1):
 def getData(min_zip='00000',max_zip='99999',pages=1,dist='all'):
     ziplist = zipcodes[(zipcodes.ZIP > min_zip) & (zipcodes.ZIP <= max_zip)].ZIP.values
     
-    df = pd.DataFrame(cargurus('10543',dist=dist,page_num=1)['listings'])
-    df = df.iloc[0:0]
+    df = pd.DataFrame(cargurus('10022',dist=dist,page_num=1)['listings']) # get listing schema
+    df = df.iloc[0:0] # truncate
+
     for zipcode in ziplist: #zipcodes.ZIP.values:
-        for i in range(0,pages):
+        for i in range(0,pages): # UPDATE: COUNT ADDITIONAL NEW CARS PER PAGE; ITERATE UNTIL NO NEW CARS
             print("Zipcode: "+zipcode+'; Page #'+str(i+1))
             df = pd.concat([df,pd.DataFrame(cargurus(zipcode,dist=dist,page_num=1+i)['listings'])])
-            # COUNT ADDITIONAL NEW CARS PER PAGE; ITERATE UNTIL NO NEW CARS
+            	# UPDATE: MANY DUPLICATES--REWRITE TO CHECK EACH VIN NUMBER AGAINST ALL (DICTIONARY?) BEFORE STORING
+
         df.drop_duplicates(inplace=True,subset=['vehicleIdentifier'])
         print(df.shape[0],'cars scraped')
     
